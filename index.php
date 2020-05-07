@@ -21,10 +21,21 @@ include_once 'config/config.php';
 
             <div id="menu">
                 <ul>
-                    <li><a href="<?php echo URI_HOME ?>">Home</a></li>
-                    <li><a href="<?php echo URI_EVENTS ?>">Events</a></li>
-                    <li><a href="<?php echo URI_FAQ ?>">FAQ</a></li>
-                    <li><a href="<?php echo URI_KONTAKT ?>">Kontakt</a></li>
+                    <?php
+                    $menu = array(
+                        '/home' => 'Home',
+                        '/events' => 'Events',
+                        '/faq' => 'FAQ',
+                        '/kontakt' => 'Kontakt'
+                    );
+                    foreach ($menu as $href => $title) {
+                        $liContent = $title;
+                        if ($href != strtolower($_SERVER['REQUEST_URI'])) {
+                            $liContent = "<a href=\"$href\">$title</a>";
+                        }
+                        echo "<li>$liContent</li>\n";
+                    }
+                    ?>
                 </ul>
             </div>
 
